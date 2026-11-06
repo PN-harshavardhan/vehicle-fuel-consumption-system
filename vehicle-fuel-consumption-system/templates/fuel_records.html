@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3"><h2>Fuel records</h2><a class="btn btn-primary" href="{{ url_for('fuel.add_fuel') }}">Add fuel record</a></div>
+<div class="table-responsive"><table class="table table-striped">
+<thead><tr><th>Vehicle</th><th>Date</th><th>Odometer</th><th>Litres</th><th>Cost</th><th>Fill type</th></tr></thead>
+<tbody>{% for r in records %}<tr><td>{{ r.vehicle_code }}</td><td>{{ r.fill_date }}</td><td>{{ r.odometer_km }}</td><td>{{ r.litres }}</td><td>₹{{ r.total_cost }}</td><td>{{ "Full tank" if r.full_tank_flag else "Partial" }}</td></tr>
+{% else %}<tr><td colspan="6">No fuel records yet.</td></tr>{% endfor %}</tbody></table></div>
+{% endblock %}

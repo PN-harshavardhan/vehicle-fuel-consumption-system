@@ -1,0 +1,7 @@
+body { background: #f4f6f9; color: #202938; }
+.navbar-brand { font-weight: 700; letter-spacing: .3px; }
+.metric { background: white; border-radius: 12px; padding: 22px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+.metric span { display:block; color:#6b7280; }
+.metric strong { display:block; font-size:2rem; margin-top:8px; }
+.card { border: 0; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+.form-card { max-width: 650px; }

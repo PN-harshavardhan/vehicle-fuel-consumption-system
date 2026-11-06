@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between mb-3"><h2>Vehicles</h2><a class="btn btn-primary" href="{{ url_for('vehicles.add_vehicle') }}">Add vehicle</a></div>
+<table class="table table-striped"><thead><tr><th>Code</th><th>Type</th><th>Fuel</th></tr></thead><tbody>
+{% for v in vehicles %}<tr><td>{{ v.vehicle_code }}</td><td>{{ v.vehicle_type }}</td><td>{{ v.fuel_type }}</td></tr>{% else %}<tr><td colspan="3">No vehicles added.</td></tr>{% endfor %}
+</tbody></table>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h1>Fuel Consumption Dashboard</h1><p class="text-muted">Track vehicles, fuel usage and efficiency.</p></div>
+  <a class="btn btn-primary" href="{{ url_for('fuel.add_fuel') }}">+ Add fuel record</a>
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-md-4"><div class="metric"><span>Vehicles</span><strong>{{ vehicles|length }}</strong></div></div>
+  <div class="col-md-4"><div class="metric"><span>Efficiency reports</span><strong>{{ analysis.vehicle_summary|length }}</strong></div></div>
+  <div class="col-md-4"><div class="metric"><span>Monthly entries</span><strong>{{ analysis.monthly_summary|length }}</strong></div></div>
+</div>
+<div class="card p-3">
+  <h5>Vehicle-wise mileage</h5>
+  {% if analysis.vehicle_summary %}
+  <div class="table-responsive"><table class="table">
+    <thead><tr><th>Vehicle</th><th>Average km/l</th><th>Distance (km)</th><th>Fuel cost</th><th>Cost/km</th></tr></thead>
+    <tbody>{% for r in analysis.vehicle_summary %}
+      <tr><td>{{ r.vehicle_code }}</td><td>{{ r.mileage }}</td><td>{{ r.distance }}</td><td>₹{{ r.fuel_cost }}</td><td>₹{{ r.cost_per_km }}</td></tr>
+    {% endfor %}</tbody>
+  </table></div>
+  {% else %}<p>No calculated mileage yet. Add at least two fuel readings for a vehicle.</p>{% endif %}
+</div>
+{% endblock %}

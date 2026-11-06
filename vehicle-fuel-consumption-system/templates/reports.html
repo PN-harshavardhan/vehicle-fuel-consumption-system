@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Analysis and reports</h2>
+<h5>Monthly summary</h5>
+<div class="table-responsive"><table class="table table-striped"><thead><tr><th>Month</th><th>Distance (km)</th><th>Litres</th><th>Fuel cost</th><th>km/l</th></tr></thead><tbody>
+{% for r in analysis.monthly_summary %}<tr><td>{{ r.month }}</td><td>{{ r.distance }}</td><td>{{ r.litres }}</td><td>₹{{ r.cost }}</td><td>{{ r.mileage }}</td></tr>{% else %}<tr><td colspan="5">No monthly data available.</td></tr>{% endfor %}
+</tbody></table></div>
+<div class="row g-3 my-3">
+  <div class="col-lg-6"><div class="card p-2"><h6>Monthly mileage trend</h6><img class="img-fluid" src="{{ url_for('static', filename='charts/monthly_mileage.png') }}" alt="Monthly mileage chart" onerror="this.style.display='none'"></div></div>
+  <div class="col-lg-6"><div class="card p-2"><h6>Monthly fuel expense</h6><img class="img-fluid" src="{{ url_for('static', filename='charts/monthly_cost.png') }}" alt="Monthly fuel cost chart" onerror="this.style.display='none'"></div></div>
+</div>
+<h5 class="mt-4">Invalid-reading report</h5>
+{% if analysis.invalid %}<ul>{% for r in analysis.invalid %}<li>{{ r.vehicle_code }} — {{ r.calculation_note }}</li>{% endfor %}</ul>{% else %}<p class="text-muted">No decreasing odometer readings detected in the calculated data.</p>{% endif %}
+<h5 class="mt-4">Calculation details</h5>
+<p class="small text-muted">Full-tank-to-full-tank mileage is distance since the previous full-tank reading divided by litres added at the ending full-tank reading. If a partial fill is involved, distance divided by litres added is only an approximation and should not be treated as exact consumption.</p>
+{% endblock %}
